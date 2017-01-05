@@ -1,6 +1,6 @@
 <?php
 $ip = "127.0.0.1";
-$len = 300;
+$len = 160;
 if(is_array($_SERVER)&&count($_SERVER)>0)
 {
 	if(isset($_SERVER['REMOTE_ADDR']))
@@ -25,15 +25,23 @@ if(is_array($_GET)&&count($_GET)>0)
 		$len = $_GET['l'];
 	}
 }
+$cnum = $num;	//color number
+if(is_array($_GET)&&count($_GET)>0)
+{
+	if(isset($_GET['c']))
+	{
+		$cnum = $_GET['c'];
+	}
+}
 $bstr = sprintf("%015b",$num);
 $idx = array(  0, 20, 40,  0, 20, 40,  0, 20, 40,  0, 20, 40,  0, 20, 40 );
 $idy = array(  0,  0,  0, 20, 20, 20, 40, 40, 40, 60, 60, 60, 80, 80, 80 );
-$rgb = array(255,215,175,135, 95,  0);
-$fr = $num % 6;
-$fg = $num / 6 % 6;
-$fb = $num / 6 / 6 % 6;
+$rgb = array(  0, 95,135,175,215,255);
+$fr = ($cnum - 16) / 6 / 6 % 6;
+$fg = ($cnum - 16) / 6 % 6;
+$fb = ($cnum - 16) % 6;
 
-$img = imagecreatetruecolor($len,$len);//æ–°å»ºä¸€ä¸ªçœŸå½©è‰²å›¾åƒï¼Œé»˜è®¤èƒŒæ™¯æ˜¯é»‘è‰²ï¼Œè¿”å›å›¾åƒæ ‡è¯†ç¬¦ã€‚
+$img = imagecreatetruecolor($len,$len);	//ĞÂ½¨Í¼Ïñ£¬Ä¬ÈÏ±³¾°ÊÇºÚÉ«£¬·µ»ØÍ¼Ïñ±êÊ¶·û¡£
 $colorf = imagecolorallocate($img, $rgb[$fr],$rgb[$fg],$rgb[$fb]);
 $colorb = imagecolorallocate($img, 238,238,238);
 
@@ -50,6 +58,6 @@ for ($i=0; $i<15; $i++)
     }   
 }
 header("content-type: image/png");
-imagepng($img);//è¾“å‡ºåˆ°é¡µé¢ã€‚å¦‚æœæœ‰ç¬¬äºŒä¸ªå‚æ•°[,$filename],åˆ™è¡¨ç¤ºä¿å­˜å›¾åƒ
+imagepng($img);	//Êä³öµ½Ò³Ãæ¡£Èç¹ûÓĞµÚ¶ş¸ö²ÎÊı[,$filename],Ôò±íÊ¾±£´æÍ¼Ïñ
 imagedestroy($img);
 ?>

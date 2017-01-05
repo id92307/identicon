@@ -14,7 +14,6 @@ if(is_array($_SERVER)&&count($_SERVER)>0)
 }
 $iparr = explode('.', $ip);
 $num = 256 * $iparr[0] + $iparr[1];
-
 if(is_array($_GET)&&count($_GET)>0)
 {
 	if(isset($_GET['id']))
@@ -26,13 +25,21 @@ if(is_array($_GET)&&count($_GET)>0)
 		$len = $_GET['l'];
 	}
 }
+$cnum = $num;	//color number
+if(is_array($_GET)&&count($_GET)>0)
+{
+	if(isset($_GET['c']))
+	{
+		$cnum = $_GET['c'];
+	}
+}
 $bstr = sprintf("%015b",$num);
 $idx = array(  0, 20, 40,  0, 20, 40,  0, 20, 40,  0, 20, 40,  0, 20, 40 );
 $idy = array(  0,  0,  0, 20, 20, 20, 40, 40, 40, 60, 60, 60, 80, 80, 80 );
-$rgb = array(255,215,175,135, 95,  0);
-$fr = $num % 6;
-$fg = $num / 6 % 6;
-$fb = $num / 6 / 6 % 6;
+$rgb = array(  0, 95,135,175,215,255);
+$fr = ($cnum - 16) / 6 / 6 % 6;
+$fg = ($cnum - 16) / 6 % 6;
+$fb = ($cnum - 16) % 6;
 
 echo "<svg width=\"".($len/10)."em\" height=\"".($len/10)."em\">\n";
 echo "<rect x=\"0%\" y=\"0%\" width=\"100%\" height=\"100%\" style=\"fill:rgb(252,252,252)\" />\n";//灰色背景
@@ -49,4 +56,3 @@ for ($i=0; $i<15; $i++)
 }
 echo "</svg>\n";
 ?>
-
