@@ -1,6 +1,7 @@
 <?php
 $ip = "127.0.0.1";
 $len = 100;
+$token = 0;
 if(is_array($_SERVER)&&count($_SERVER)>0)
 {
 	if(isset($_SERVER['REMOTE_ADDR']))
@@ -16,6 +17,11 @@ $iparr = explode('.', $ip);
 $num = 256 * $iparr[0] + $iparr[1];
 if(is_array($_GET)&&count($_GET)>0)
 {
+	if(isset($_GET['t']))
+	{
+		$token = $_GET['t'];
+	}
+	$num = $num + $token;
 	if(isset($_GET['id']))
 	{
 		$num = $_GET['id'];
@@ -25,6 +31,7 @@ if(is_array($_GET)&&count($_GET)>0)
 		$len = $_GET['l'];
 	}
 }
+
 $cnum = $num;	//color number
 if(is_array($_GET)&&count($_GET)>0)
 {
