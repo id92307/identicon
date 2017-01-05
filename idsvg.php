@@ -42,7 +42,7 @@ $fg = ($cnum - 16) / 6 % 6;
 $fb = ($cnum - 16) % 6;
 
 echo "<svg width=\"".($len/10)."em\" height=\"".($len/10)."em\">\n";
-echo "<rect x=\"0%\" y=\"0%\" width=\"100%\" height=\"100%\" style=\"fill:rgb(252,252,252)\" />\n";//灰色背景
+echo "<rect x=\"0%\" y=\"0%\" width=\"100%\" height=\"100%\" style=\"fill:rgb(252,252,252)\" />\n";
 for ($i=0; $i<15; $i++)
 {
     if($bstr[$i] == "1")

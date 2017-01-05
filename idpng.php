@@ -41,9 +41,9 @@ $fr = ($cnum - 16) / 6 / 6 % 6;
 $fg = ($cnum - 16) / 6 % 6;
 $fb = ($cnum - 16) % 6;
 
-$img = imagecreatetruecolor($len,$len);	//新建图像，默认背景是黑色，返回图像标识符。
+$img = imagecreatetruecolor($len,$len);
 $colorf = imagecolorallocate($img, $rgb[$fr],$rgb[$fg],$rgb[$fb]);
-$colorb = imagecolorallocate($img, 238,238,238);
+$colorb = imagecolorallocate($img, 252,252,252);
 
 imagefill($img,0,0,$colorb);
 for ($i=0; $i<15; $i++)
@@ -58,6 +58,7 @@ for ($i=0; $i<15; $i++)
     }   
 }
 header("content-type: image/png");
-imagepng($img);	//输出到页面。如果有第二个参数[,$filename],则表示保存图像
+imagepng($img);
+//imagepng($img, "path/file.png");
 imagedestroy($img);
 ?>
